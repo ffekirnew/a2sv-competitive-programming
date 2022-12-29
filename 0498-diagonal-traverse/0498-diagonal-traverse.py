@@ -8,27 +8,14 @@ class Solution:
         answer = []
         
         # generate all diagonals and store them
-        diagonals = []
-        for i in range(rows):
-            diagonals.append([])
-            row, col = i, 0
-            while row > -1 and col <  cols:
-                diagonals[-1].append(mat[row][col])
-                row -= 1
-                col += 1
-        diagonals.pop()
-        for j in range(cols):
-            diagonals.append([])
-            row, col = i, j
-            while row > -1 and col <  cols:
-                diagonals[-1].append(mat[row][col])
-                row -= 1
-                col += 1
-            
+        diagonals = defaultdict(list)
+        for row in range(rows):
+            for col in range(cols):
+                diagonals[row + col].append(mat[row][col])
         
         # loop through the diagonals and append the answers
-        forward = True
-        for diagonal in diagonals:
+        forward = False
+        for diagonal in diagonals.values():
             if forward:
                 for number in diagonal:
                     answer.append(number)
