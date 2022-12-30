@@ -1,29 +1,31 @@
 class Solution:
-    def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
-        # give variables for rows and columns
-        rows = len(grid)
-        cols = len(grid[0])
-        
-        # create the object to be returned
-        answer = []
-        
-        # find row and column ones and zeros
-        row_zeros_ones = defaultdict(dict)
-        col_zeros_ones = defaultdict(dict)
-        for row in range(rows):
-            for col in range(cols):
-                row_zeros_ones[row][grid[row][col]] = row_zeros_ones[row].get(grid[row][col], 0) + 1
-                col_zeros_ones[col][grid[row][col]] = col_zeros_ones[col].get(grid[row][col], 0) + 1
+	def onesMinusZeros(self, grid: List[List[int]]) -> List[List[int]]:
 
-        # fill the answers
-        for row in range(rows):
-            answer.append([])
-            for col in range(cols):
-                diff = row_zeros_ones[row].get(1, 0) + col_zeros_ones[col].get(1, 0)
-                diff -= row_zeros_ones[row].get(0, 0) + col_zeros_ones[col].get(0, 0)
-                answer[-1].append(diff)
-                
-        
-        # return the solution
-        return answer
-        
+		ones_row = []
+		ones_col = []
+
+		zero_row = []
+		zero_col = []
+
+		for row in grid:
+			one = sum(row)
+			zero = len(grid[0]) - one
+
+			ones_row.append(one)
+			zero_row.append(zero)
+
+		for c in range(len(grid[0])):
+			current_sum = 0
+			for r in range(len(grid)):
+				current_sum = current_sum + grid[r][c]
+
+			ones_col.append(current_sum)
+			zero_col.append(len(grid) - current_sum)
+
+		result = [[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
+
+		for r in range(len(grid)):
+			for c in range(len(grid[0])):
+				result[r][c] = ones_row[r] + ones_col[c] - zero_row[r] - zero_col[c]
+
+		return result
