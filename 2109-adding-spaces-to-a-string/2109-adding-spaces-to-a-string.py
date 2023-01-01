@@ -10,6 +10,5 @@ class Solution:
                 space_ctr += 1
             answer.append(char)
         # return the solution
-        print("".join(answer))
         return "".join(answer)
         
