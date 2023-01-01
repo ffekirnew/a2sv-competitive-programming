@@ -1,15 +1,13 @@
 class Bank:
 
     def __init__(self, balance: List[int]):
-        self.balance = {}
-        for i, acc_balance in enumerate(balance):
-            self.balance[i + 1] = acc_balance
+        self.balance = balance
 
     def transfer(self, account1: int, account2: int, money: int) -> bool:
         if 0 < account1 <= len(self.balance) and 0 < account2 <= len(self.balance):
-            if money <= self.balance[account1]:
-                self.balance[account1] -= money
-                self.balance[account2] += money
+            if money <= self.balance[account1 - 1]:
+                self.balance[account1 - 1] -= money
+                self.balance[account2 - 1] += money
                 return True
 
         return False
@@ -17,15 +15,15 @@ class Bank:
 
     def deposit(self, account: int, money: int) -> bool:
         if 0 < account <= len(self.balance):
-            self.balance[account] += money
+            self.balance[account - 1] += money
             return True
 
         return False
         
 
     def withdraw(self, account: int, money: int) -> bool:
-        if 0 < account <= len(self.balance) and money <= self.balance[account]:
-            self.balance[account] -= money
+        if 0 < account <= len(self.balance) and money <= self.balance[account - 1]:
+            self.balance[account - 1] -= money
             return True
 
         return False
