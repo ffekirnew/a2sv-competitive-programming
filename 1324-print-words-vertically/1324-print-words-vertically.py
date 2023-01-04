@@ -12,10 +12,5 @@ class Solution:
                 while len(vertical[char_idx]) < word_idx:
                     vertical[char_idx].append(" ")
                 vertical[char_idx].append(char)
-        
-        # collect the values
-        vertical_words = []
-        for value in vertical.values():
-            vertical_words.append("".join(value))
 
-        return vertical_words
+        return list(map("".join, vertical.values()))
