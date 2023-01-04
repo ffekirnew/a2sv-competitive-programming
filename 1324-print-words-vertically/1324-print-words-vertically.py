@@ -2,9 +2,6 @@ class Solution:
     def printVertically(self, s: str) -> List[str]:
         # split s into a list
         s = s.split()
-        
-        # find out the longest word and at which index in happens
-        max_len = max(map(len, s))
 
         # create the object to be returned
         vertical = defaultdict(list)
