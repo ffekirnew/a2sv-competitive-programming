@@ -3,19 +3,21 @@ class Solution:
         # create variables to hold the length and height of the matrix
         row = len(matrix)
         col = len(matrix[0])
+        
         # create the object to be returned
         answer = []
+        
         # create a hashmap to keep track of the already visited rows
         rows = {}
         columns = {}
+        
         # create direction guides
         directions = ['r', 'd', 'l', 'u']
         curr_direction = directions[0]
+        
         # create a variable to aid in the looping
         i, j = 0, 0
         while len(rows.keys()) <= len(matrix):
-            print(answer)
-            print("rows:", rows, "columns:", columns)
             answer.append(matrix[i][j])
             if curr_direction == 'r':
                 next_col = j + 1
@@ -33,7 +35,6 @@ class Solution:
                 print(i)
                 next_row = i + 1
                 if next_row in rows or next_row == row:
-                    print("i am here")
                     next_col = j - 1
                     if next_col in columns or next_col == -1: 
                         break
