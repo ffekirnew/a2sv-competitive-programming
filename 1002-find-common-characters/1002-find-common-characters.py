@@ -9,11 +9,13 @@ class Solution:
                 counts[-1][ord(char) - ord('a')] += 1
         
         for i in range(26):
-            curr_count = float('inf')
+            min_count = float('inf')
             for count in counts:
-                curr_count = min(curr_count, count[i])
+                min_count = min(min_count, count[i])
+                if not min_count:
+                    break
             
-            for j in range(curr_count):
+            for j in range(min_count):
                 answer.append(chr(i + ord('a')))
                 
                 
