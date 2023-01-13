@@ -1,74 +1,35 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        # create variables to hold the length and height of the matrix
-        row = len(matrix)
-        col = len(matrix[0])
+        # rows and cols for simplicity
+        rows = len(matrix)
+        cols = len(matrix[0])
         
-        # create the object to be returned
+        # create the obect to be returned
         answer = []
         
-        # create a hashmap to keep track of the already visited rows
-        rows = {}
-        columns = {}
         
-        # create direction guides
-        directions = ['r', 'd', 'l', 'u']
-        curr_direction = directions[0]
+        # specify the directions to go at
+        directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
         
-        # create a variable to aid in the looping
-        i, j = 0, 0
-        while len(rows.keys()) <= len(matrix):
-            answer.append(matrix[i][j])
-            if curr_direction == 'r':
-                next_col = j + 1
-                if next_col in columns or next_col == col:
-                    next_row = i + 1
-                    if next_row in rows or next_row == row: 
-                        break
-                    else: 
-                        rows[i] = 1
-                        i = next_row
-                        curr_direction = 'd'
-                else:
-                    j = next_col
-            elif curr_direction == 'd':
-                print(i)
-                next_row = i + 1
-                if next_row in rows or next_row == row:
-                    next_col = j - 1
-                    if next_col in columns or next_col == -1: 
-                        break
-                    else:
-                        columns[j] = 1
-                        j = next_col
-                        curr_direction = 'l'
-                else:
-                    i = next_row
-            elif curr_direction == 'l':
-                next_col = j - 1
-                if next_col in columns or next_col == -1:
-                    next_row = i - 1
-                    if next_row in rows or next_row == -1: 
-                        break
-                    else:
-                        rows[i] = 1
-                        i = next_row
-                        curr_direction = 'u'
-                else:
-                    j = next_col
-            else:
-                next_row = i - 1
-                if next_row in rows or next_row == -1:
-                    next_col = j + 1
-                    if next_col in columns or next_col == col: 
-                        break
-                    else:
-                        columns[j] = 1
-                        j = next_col
-                        curr_direction = 'r'
-                else:
-                    i = next_row
+        # store the current direction:
+        curr_dir = 0
+        
+        # store the current location
+        curr_loc = [0, -1]
+        
+        total = rows * cols
+        
+        # loop through the matrix
+        i = 0
+        while i < total:
+            next_loc = [curr_loc[0] + directions[curr_dir][0], curr_loc[1] + directions[curr_dir][1]]
             
-                    
-        # return the object
+            if 0 <= next_loc[0] < rows and 0 <= next_loc[1] < cols and matrix[next_loc[0]][next_loc[1]] != 101:
+                answer.append(matrix[next_loc[0]][next_loc[1]])
+                matrix[next_loc[0]][next_loc[1]] = 101
+                curr_loc = next_loc
+                i += 1
+            else:
+                curr_dir = (curr_dir + 1) % 4
+        
         return answer
