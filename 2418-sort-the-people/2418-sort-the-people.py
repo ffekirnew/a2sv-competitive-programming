@@ -1,15 +1,17 @@
 class Solution:
     def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
-        # do selection sort
-        for idx in range(1, len(heights)):
-            curr_idx = idx
-            
-            while curr_idx > 0:
-                if heights[curr_idx] > heights[curr_idx - 1]:
-                    heights[curr_idx], heights[curr_idx - 1] = heights[curr_idx - 1], heights[curr_idx]
-                    names[curr_idx], names[curr_idx - 1] = names[curr_idx - 1], names[curr_idx]
-                    curr_idx -= 1
-                else:
-                    break
-        return names
+        # do counting sort
         
+        max_height = max(heights)
+        
+        counter = [[] for i in range(max_height)]
+        
+        for i in range(len(heights)):
+            counter[heights[i] - 1].append(names[i])
+        
+        answer = []
+        
+        for count in reversed(counter):
+            answer.extend(count)
+        
+        return answer
