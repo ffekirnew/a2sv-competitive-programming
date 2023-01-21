@@ -4,7 +4,6 @@ from collections import defaultdict
 if __name__ == "__main__":
     # accept the input
     rows, cols = map(int, input().split())
-
     grid = []
     for row in range(rows):
         grid.append(list(input()))
