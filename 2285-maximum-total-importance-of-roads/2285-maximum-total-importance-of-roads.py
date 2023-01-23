@@ -7,12 +7,12 @@ class Solution:
             roads_1d.append(a)
             roads_1d.append(b)
         
-        freq = list(Counter(roads_1d).values())
-        freq.sort(reverse = True)
+        vals = list(Counter(roads_1d).values())
+        vals.sort(reverse = True)
         
         answer = 0
         
-        for val in freq:
+        for val in vals:
             answer += n * val
             n -= 1
         
