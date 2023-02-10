@@ -5,12 +5,7 @@ class Solution:
         """
         auxiliary = []
         
-        boundary = len(nums) - k
-
-        while boundary >= len(nums):
-            boundary -= len(nums)
-        while boundary < -1 * len(nums):
-            boundary += len(nums)
+        boundary = (len(nums) - k) % len(nums)
 
         for idx in range( boundary, len(nums) ):
             auxiliary.append(nums[idx])
