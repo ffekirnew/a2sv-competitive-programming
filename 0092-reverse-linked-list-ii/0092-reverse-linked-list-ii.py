@@ -4,28 +4,20 @@
 #         self.val = val
 #         self.next = next
 class Solution: 
-    def addToNodeTail(self, head: Optional[ListNode], val: int):
+    def addToNodeTail(self, head: Optional[ListNode], val: any):
         if head:
             curr = head
             
             while curr and curr.next:
                 curr = curr.next
-            
-            curr.next = ListNode(val)
+            curr.next = ListNode(val) if isinstance(val, int) else val
             
             return head
 
         return ListNode(val)
     
     def addToNodeHead(self, head: Optional[ListNode], val: int):
-        if head:
-            temp = ListNode(val)
-            temp.next = head
-            head = temp
-            
-            return head
-        
-        return ListNode(val)
+        return ListNode(val, head if head else None)
 
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
         # convert the linked list into three segments
@@ -49,26 +41,8 @@ class Solution:
             head = head.next
             
         # link all of them
-        if middle_node:
-            curr = middle_node
-            
-            while curr.next:
-                curr = curr.next
-            
-            curr.next = end_node
-        else:
-            middle_node = end_node
-            
-        if start_node:
-            curr = start_node
-            
-            while curr.next:
-                curr = curr.next
-            
-            curr.next = middle_node
-
-        else:
-            start_node = middle_node
+        middle_node = self.addToNodeTail(middle_node, end_node) if middle_node else end_node
+        start_node = self.addToNodeTail(start_node, middle_node) if start_node else middle_node
         
 
         # return the head
