@@ -9,8 +9,6 @@ class Solution:
         for i, zero in enumerate(zeros):
             zeros[i] += zeros[i - 1] if i > 0 else 0
         
-        print(zeros)
-        
         answer = []
         
         for i, char in enumerate(s):
