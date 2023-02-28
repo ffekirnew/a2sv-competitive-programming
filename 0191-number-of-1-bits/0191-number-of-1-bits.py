@@ -1,6 +1,6 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
-        if not n or n == 1:
+        if not n:
             return n
         else:
             return self.hammingWeight(n // 2) + n % 2
