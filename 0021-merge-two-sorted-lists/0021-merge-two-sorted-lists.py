@@ -5,15 +5,21 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # create the object to be returned
-        answer = ListNode()
-        curr_node = answer
-        # loop through the lists like in the merging part of merge sort (with two pointers)
-        while (list1 and list2):
-            if list1.val < list2.val: curr_node.next, list1 = list1, list1.next
-            else: curr_node.next, list2 = list2, list2.next
+        if not list1:
+            return list2
+        elif not list2:
+            return list1
+        else:
+            head = None
             
-            curr_node = curr_node.next
-        curr_node.next = list2 if (list1 is None) else list1
-        return answer.next
+            if list1.val < list2.val:
+                head = ListNode(list1.val)
+                head.next = self.mergeTwoLists(list1.next, list2)
+            else:
+                head = ListNode(list2.val)
+                head.next = self.mergeTwoLists(list2.next, list1)
+            
+            return head
+        
+        
         
