@@ -2,9 +2,11 @@ class Solution:
     def compress(self, chars: List[str]) -> int:
         if len(chars) < 2:
             return len(chars)
+
         # create the two pointers
         i, j = len(chars) - 2, len(chars) - 1
         diff = 0
+
         # loop in reverse in chars and pop what needs to be pooped
         while i >= 0:
             if chars[i] == chars[j]:
@@ -19,5 +21,6 @@ class Solution:
                     diff //= 10
             i -= 1
             j -= 1
+
         # return the solution
         return len(chars)
