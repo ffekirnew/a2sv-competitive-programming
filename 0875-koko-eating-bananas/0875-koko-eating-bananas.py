@@ -6,17 +6,17 @@ class Solution:
         while lo <= hi:
             mid = lo + ( hi - lo ) // 2
             
-            all_sum = sum([ math.ceil( pile / mid ) for pile in piles ])
+            total_hours = sum([ math.ceil( pile / mid ) for pile in piles ])
             
-            if all_sum == h:
-                prev_all_sum = sum([ math.ceil( pile / (mid - 1 )) for pile in piles ])
+            if total_hours == h:
+                prev_total_hours = sum([ math.ceil( pile / (mid - 1 )) for pile in piles ])
                 
-                if prev_all_sum != h:
+                if prev_total_hours != h:
                     return mid
                 
                 hi = mid
             
-            elif all_sum < h:
+            elif total_hours < h:
                 hi = mid - 1
             
             else:
