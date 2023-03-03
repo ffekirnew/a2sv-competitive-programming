@@ -11,18 +11,15 @@ class Solution:
         return freq[lex_small]
     
     def numSmallerByFrequency(self, queries: List[str], words: List[str]) -> List[int]:
-        for i in range(len(words)):
-            words[i] = self.f(words[i])
-        
         result = []
         
+        for i in range(len(words)):
+            words[i] = self.f(words[i])
+
+        words.sort()
+        
         for query in queries:
-            length = self.f(query)
-            ans = 0
-            for word in words:
-                if word > length:
-                    ans += 1
-            result.append(ans)
+            result.append( len(words) - bisect_right( words, self.f(query) ) )
         
         return result
         
