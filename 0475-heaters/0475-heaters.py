@@ -12,5 +12,3 @@ class Solution:
             min_ = max( min_, radius )
         
         return min_
-            
-            # min_ = max( min_,  )
