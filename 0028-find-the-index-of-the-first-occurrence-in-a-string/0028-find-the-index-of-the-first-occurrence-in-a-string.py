@@ -1,7 +1,5 @@
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        starters = []
-        
         for i, char in enumerate(haystack):
             if char == needle[0]:
                 j, k = i, 0
