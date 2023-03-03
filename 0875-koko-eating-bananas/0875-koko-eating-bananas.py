@@ -14,7 +14,7 @@ class Solution:
                 if prev_total_hours != h:
                     return mid
                 
-                hi = mid
+                hi = mid - 1
             
             elif total_hours < h:
                 hi = mid - 1
