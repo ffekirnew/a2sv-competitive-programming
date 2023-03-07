@@ -7,19 +7,19 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        def search(node, key, answer):
+        def get_ancestors(node, key, answer):
             answer.append(node)
             
             if node.val == key:
                 return answer
             
             if node.val < key:
-                return search(node.right, key, answer)
+                return get_ancestors(node.right, key, answer)
             
-            return search(node.left, key, answer)
+            return get_ancestors(node.left, key, answer)
             
-        p_ancestors = search(root, p.val, [])
-        q_ancestors = search(root, q.val, [])
+        p_ancestors = get_ancestors(root, p.val, [])
+        q_ancestors = get_ancestors(root, q.val, [])
         
         for i in range(min( len(p_ancestors), len(q_ancestors) )):
             if p_ancestors[i] != q_ancestors[i]:
