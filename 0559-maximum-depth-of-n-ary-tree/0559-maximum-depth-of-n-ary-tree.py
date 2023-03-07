@@ -11,5 +11,5 @@ class Solution:
         if not root:
             return 0
         
-        return 1 + max( [self.maxDepth(node) for node in root.children] ) if root.children else 1
+        return 1 + max( self.maxDepth(node) for node in root.children ) if root.children else 1
         
