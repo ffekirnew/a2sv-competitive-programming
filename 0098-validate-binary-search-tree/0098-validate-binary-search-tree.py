@@ -18,7 +18,6 @@ class Solution:
         
         traverseInOrder(root)
         
-        print(tree)
         for i in range(1, len(tree)):
             if tree[i] <= tree[i - 1]:
                 return False
