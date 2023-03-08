@@ -7,7 +7,7 @@
 class Solution:
     def averageOfSubtree(self, root: Optional[TreeNode], isRoot: bool = True) -> int:
         if not root:
-            return tuple([0, 0, 0])
+            return 0, 0, 0
         
         left_sum, left_num_nodes, left_count = self.averageOfSubtree(root.left, False)
         right_sum, right_num_nodes, right_count = self.averageOfSubtree(root.right, False)
@@ -19,4 +19,4 @@ class Solution:
         
         if isRoot:
             return count
-        return tuple([ total_sum, num_nodes, count ])
+        return total_sum, num_nodes, count
