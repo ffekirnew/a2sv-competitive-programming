@@ -5,7 +5,7 @@
 #         self.next = next
 class Solution:
     @staticmethod
-    def splitNode(head: Optional[ListNode]) -> [Optional[ListNode], Optional[ListNode]]:
+    def splitNode(head: Optional[ListNode]) -> (Optional[ListNode], Optional[ListNode]):
         # create two pointers
         left = head
         prev = None
@@ -22,19 +22,19 @@ class Solution:
     def merge(self, left: Optional[ListNode], right: Optional[ListNode]) -> Optional[ListNode]:
         if not left:
             return right
-        elif not right:
+        if not right:
             return left
+
+        head = None
+
+        if left.val < right.val:
+            head = ListNode(left.val)
+            head.next = self.merge(left.next, right)
         else:
-            head = None
-            
-            if left.val < right.val:
-                head = ListNode(left.val)
-                head.next = self.merge(left.next, right)
-            else:
-                head = ListNode(right.val)
-                head.next = self.merge(right.next, left)
-            
-            return head
+            head = ListNode(right.val)
+            head.next = self.merge(right.next, left)
+
+        return head
 
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
