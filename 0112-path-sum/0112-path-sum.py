@@ -12,9 +12,7 @@ class Solution:
             return (curr_sum + node.val) == (self.targetSum)
             
         curr_sum += node.val
-        if self.backtrack(curr_sum, node.left):
-            return True
-        if self.backtrack(curr_sum, node.right):
+        if self.backtrack(curr_sum, node.left) or self.backtrack(curr_sum, node.right):
             return True
         curr_sum -= node.val
         
