@@ -7,8 +7,8 @@ class Solution:
         stack = []
         
         for num in nums:
-            while stack and num - stack[-1] > 1:
-                stack = []
+            if stack and num - stack[-1] > 1:
+                stack.clear()
             if not stack or num - stack[-1] == 1:
                 stack.append(num)
             max_length = max( max_length, len(stack) )
