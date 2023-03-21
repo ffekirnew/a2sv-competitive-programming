@@ -24,7 +24,6 @@ class Solution:
 
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         self.targetSum = targetSum
-        
         self.answers = []
         # do some
         self.backtrack(0, [], root)
