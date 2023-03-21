@@ -5,10 +5,8 @@ class Solution:
         l, r = 0, 0
         
         while r < len(nums):
-            while l < len(nums) and nums[l]:
+            while l < len(nums) and nums[l] != 0:
                 l += 1
-            
-            while r < l:
                 r += 1
             
             while l < len(nums) and r < len(nums) and nums[l] == nums[r] == 0:
