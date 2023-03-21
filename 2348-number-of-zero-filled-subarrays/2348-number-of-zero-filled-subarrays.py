@@ -9,7 +9,7 @@ class Solution:
                 l += 1
                 r += 1
             
-            while l < len(nums) and r < len(nums) and nums[l] == nums[r] == 0:
+            while r < len(nums) and nums[l] == nums[r] == 0:
                 subarrays += r - l + 1
                 r += 1
             
