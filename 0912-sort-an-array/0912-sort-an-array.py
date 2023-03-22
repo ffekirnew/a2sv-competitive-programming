@@ -1,13 +1,35 @@
 class Solution:
+    def merge(self, left, right):
+        i, j = 0, 0
+        sorted = []
+        
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                sorted.append(left[i])
+                i += 1
+            else:
+                sorted.append(right[j])
+                j += 1
+        
+        while i < len(left):
+            sorted.append(left[i])
+            i += 1
+        
+        while j < len(right):
+            sorted.append(right[j])
+            j += 1
+        
+        return sorted
+        
+        
     def sortArray(self, nums: List[int]) -> List[int]:
-        heap = []
-        sorted_ = []
+        if len(nums) == 1:
+            return nums
+
+        mid = len(nums) // 2
         
-        for num in nums:
-            heappush(heap, num)
+        left = self.sortArray(nums[:mid])
+        right = self.sortArray(nums[mid:])
         
-        while heap:
-            sorted_.append(heappop(heap))
-        
-        return sorted_
+        return self.merge(left, right)
         
