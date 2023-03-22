@@ -27,9 +27,5 @@ class Solution:
             return nums
 
         mid = len(nums) // 2
-        
-        left = self.sortArray(nums[:mid])
-        right = self.sortArray(nums[mid:])
-        
-        return self.merge(left, right)
+        return self.merge(self.sortArray(nums[:mid]), self.sortArray(nums[mid:]))
         
