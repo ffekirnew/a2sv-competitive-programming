@@ -1,14 +1,20 @@
 class Solution:
     def findDuplicates(self, nums: List[int]) -> List[int]:
-        counting_sort = [0] * len(nums)
+        i = 0
         
-        for num in nums:
-            counting_sort[num - 1] += 1
+        while i < len(nums):
+            if nums[i] == i + 1 or nums[nums[i] - 1] == nums[i]:
+                i += 1
+            else:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i]
         
         answer = []
-        for i, num in enumerate(counting_sort):
-            if num == 2:
-                answer.append(i + 1)
-        
+
+        for i, num in enumerate(nums):
+            if num != i + 1:
+                answer.append(num)
+
         return answer
+        
         
