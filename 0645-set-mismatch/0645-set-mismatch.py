@@ -1,14 +1,16 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        freqs = Counter(nums)
+        i = 0
         
-        answer = [None, None]
+        while i < len(nums):
+            if nums[i] == i + 1 or nums[nums[i] - 1] == nums[i]:
+                i += 1
+            else:
+                j = nums[i] - 1
+                nums[i], nums[j] = nums[j], nums[i]
         
-        for i in range(1, len(nums) + 1):
-            if i in freqs and freqs[i] == 2:
-                answer[0] = i
-            elif i not in freqs:
-                answer[1] = i
+        answer = []
         
-        return answer
-        
+        for i, num in enumerate(nums):
+            if num != i + 1:
+                return [num, i + 1]
