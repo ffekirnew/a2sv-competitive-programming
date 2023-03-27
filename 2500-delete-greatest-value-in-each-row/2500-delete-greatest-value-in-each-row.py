@@ -11,8 +11,7 @@ class Solution:
 
             for row in grid:
                 deletions[-1].append(row.pop())
-            
-            print(deletions)
+
             answer += max(deletions[-1])
         
         return answer
