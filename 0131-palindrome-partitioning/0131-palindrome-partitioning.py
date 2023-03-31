@@ -1,29 +1,16 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        """
-        curr_strings, index
-        
-        ["a", "aba", "aab"] 
-        
-        "b" s[index]
-        
-        """
         
         def backtrack(curr_strings, index):
             if index == len(s):
-                answer.append(curr_strings.copy())
+                if all( is_palindrome(string) for string in curr_strings ):
+                    answer.append(curr_strings.copy())
                 return
             
-            for i in range(index, len(s)):
-                temp = s[index:i + 1]
-                """
-                index = 1
-                [a] a
-                """
-                if is_palindrome(temp):
-                    curr_strings.append(temp)
-                    backtrack(curr_strings, i + 1)
-                    curr_strings.pop()
+            backtrack(curr_strings + [s[index]], index + 1)
+            if index:
+                curr_strings[-1] += s[index]
+                backtrack(curr_strings, index + 1 )
 
         
         def is_palindrome(string: str) -> bool:
