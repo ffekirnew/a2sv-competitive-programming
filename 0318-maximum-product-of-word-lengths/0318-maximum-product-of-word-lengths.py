@@ -10,7 +10,7 @@ class Solution:
             
             words[i] = ( len(word), bit_representation, )
         
-        for i in range(len(words)):
+        for i in range(len(words)-1):
             for j in range(i + 1, len(words)):
                 if not words[i][1] & words[j][1]:
                     maximum = max(maximum, words[i][0] * words[j][0])
