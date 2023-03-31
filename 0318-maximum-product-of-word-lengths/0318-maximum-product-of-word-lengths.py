@@ -1,6 +1,6 @@
 class Solution:
     def maxProduct(self, words: List[str]) -> int:
-        words.sort(reverse=True)
+        words.sort(key=len, reverse=True)
         maximum = 0
         
         words_count = []
