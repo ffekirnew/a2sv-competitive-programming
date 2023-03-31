@@ -5,5 +5,5 @@ class Solution:
                 return a
             return gcd(b, a % b)
     
-        return gcd( sorted(nums)[0], sorted(nums)[-1] )
+        return gcd( max(nums), min(nums) )
         
