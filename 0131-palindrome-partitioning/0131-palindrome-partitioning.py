@@ -20,10 +20,22 @@ class Solution:
                 index = 1
                 [a] a
                 """
-                if s[index:i+1] == s[index:i+1][::-1]:
+                if is_palindrome(temp):
                     curr_strings.append(temp)
                     backtrack(curr_strings, i + 1)
                     curr_strings.pop()
+
+        
+        def is_palindrome(string: str) -> bool:
+            i, j = 0, len(string) - 1
+            
+            while i < j:
+                if string[i] != string[j]:
+                    return False
+                i += 1
+                j -= 1
+            
+            return True
         
         # collect answers
         answer = []
