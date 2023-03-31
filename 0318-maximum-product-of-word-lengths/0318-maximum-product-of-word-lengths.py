@@ -13,7 +13,6 @@ class Solution:
         for i in range(len(words)):
             for j in range(i + 1, len(words)):
                 if not words[i][1] & words[j][1]:
-                    print(words[i], words[j])
                     maximum = max(maximum, words[i][0] * words[j][0])
         
         return maximum
