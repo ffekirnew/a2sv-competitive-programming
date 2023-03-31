@@ -9,8 +9,7 @@ class Solution:
             total_hours = sum([ math.ceil( pile / mid ) for pile in piles ])
             
             if total_hours == h:
-                prev_total_hours = sum([ math.ceil( pile / (mid - 1 )) for pile in piles ]) if mid > 1 else inf
-                
+                prev_total_hours = sum([ math.ceil( pile / (mid - 1 )) for pile in piles ])
                 if prev_total_hours != h:
                     return mid
                 
