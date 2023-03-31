@@ -14,14 +14,9 @@ class Solution:
 
         
         def is_palindrome(string: str) -> bool:
-            i, j = 0, len(string) - 1
-            
-            while i < j:
-                if string[i] != string[j]:
+            for i in range(len(string) // 2):
+                if string[i] != string[len(string) - i - 1]:
                     return False
-                i += 1
-                j -= 1
-            
             return True
         
         # collect answers
