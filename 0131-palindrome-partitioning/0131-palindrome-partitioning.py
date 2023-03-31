@@ -4,7 +4,7 @@ class Solution:
         def backtrack(curr_strings, index):
             if index == len(s):
                 if all( is_palindrome(string) for string in curr_strings ):
-                    answer.append(curr_strings.copy())
+                    answer.append(curr_strings)
                 return
             
             backtrack(curr_strings + [s[index]], index + 1)
