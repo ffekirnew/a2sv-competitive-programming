@@ -1,16 +1,20 @@
 def unique_factorization(num: int) -> list[int]:
-    factorization: set[int] = set()
+    factorization: int = 0
 
     d = 2
 
     while d * d <= num:
+        first_d_divisor = True
         while num % d == 0:
             factorization.add(d)
+            if first_d_divisor:
+                factorization += 1
+                first_d_divisor = not first_d_divisor
             num //= d
         d += 1
     
     if num != 1:
-        factorization.add(num)
+        factorization += 1
     
     return factorization
 
