@@ -9,13 +9,16 @@ class Solution:
         
         # define the dfs algorithm
         def dfs(node):
+            if node in visited:
+                return False
+            
             if node == destination:
                 return True
             
             visited.add(node)
             
             for child in graph[node]:
-                if child not in visited and dfs(child):
+                if dfs(child):
                     return True
             
             return False
