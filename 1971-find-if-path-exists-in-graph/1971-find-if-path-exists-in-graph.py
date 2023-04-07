@@ -12,11 +12,11 @@ class Solution:
             if node == destination:
                 return True
             
+            visited.add(node)
+            
             for child in graph[node]:
-                if child not in visited:
-                    visited.add(child)
-                    if dfs(child, visited):
-                        return True
+                if child not in visited and dfs(child, visited):
+                    return True
             
             return False
         
