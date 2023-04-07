@@ -20,8 +20,6 @@ class Solution:
             for child in graph[node]:
                 if dfs(child):
                     return True
-            
-            return False
         
         # return the solution
         visited = set()
