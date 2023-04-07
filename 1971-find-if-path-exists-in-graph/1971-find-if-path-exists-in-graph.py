@@ -8,19 +8,19 @@ class Solution:
             graph[edge[1]].append(edge[0])
         
         # define the dfs algorithm
-        def dfs(node, visited):
+        def dfs(node):
             if node == destination:
                 return True
             
             visited.add(node)
             
             for child in graph[node]:
-                if child not in visited and dfs(child, visited):
+                if child not in visited and dfs(child):
                     return True
             
             return False
         
         # return the solution
         visited = set()
-        return dfs(source, visited)
+        return dfs(source)
         
