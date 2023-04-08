@@ -1,27 +1,27 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        if n <= 1:
+        if source == destination:
             return True
-
+        
+        # change the input into adjacency list
         graph = defaultdict(list)
         
         for edge in edges:
             graph[edge[0]].append(edge[1])
             graph[edge[1]].append(edge[0])
         
-        acquaintances = deque(graph[source])
-        seen = set(acquaintances)
-        
-        while acquaintances:
-            child = acquaintances.popleft()
-
-            if child == destination:
+        # define the dfs algorithm
+        def dfs(node):
+            if node == destination:
                 return True
-
-            for acquaintance in graph[child]:
-                if acquaintance not in seen:
-                    acquaintances.append(acquaintance)
-                    seen.add(acquaintance)
+            
+            visited.add(node)
+            
+            for child in graph[node]:
+                if child not in visited and dfs(child):
+                    return True
         
-        return False
+        # return the solution
+        visited = set()
+        return dfs(source)
         
