@@ -1,11 +1,5 @@
 class Solution:
-    @staticmethod
-    def buildGraph(adj_list: list[list[int]]):
-        return {i: set(children) for i, children in enumerate(adj_list)}
-    
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        
-        graph = self.buildGraph(graph)
         is_goal_node = lambda x: x == len(graph) - 1
         
         def dfs(start):
