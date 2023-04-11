@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def backtrack(self, curr_num, node):
+    def dfs(self, curr_num, node):
         if not node:
             return
         if not node.left and not node.right:
@@ -14,13 +14,13 @@ class Solution:
         
         curr_num *= 10
         curr_num += node.val
-        self.backtrack(curr_num, node.left)
-        self.backtrack(curr_num, node.right)
+        self.dfs(curr_num, node.left)
+        self.dfs(curr_num, node.right)
         curr_num -= node.val
         curr_num //= 10
         
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         self.nums = []
-        self.backtrack(0, root)
+        self.dfs(0, root)
 
         return sum(self.nums)
