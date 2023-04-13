@@ -10,8 +10,7 @@ class Solution:
             
             suffix_sum[len(suffix_sum) - i - 1] = suffix
             suffix = grid[0][len(suffix_sum) - i - 1] + suffix_sum[len(suffix_sum) - i - 1]
-        
-        print(prefix_sum, suffix_sum)
+            
             
         #Want the lowest of the worst-case scenerio.
         #Player 2 will attempt to pick the biggest of prefix_sum[i] or suffix_sum[i].
