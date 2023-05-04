@@ -1,14 +1,16 @@
+import heapq as heap
+
 class Solution:
     def minStoneSum(self, piles: List[int], k: int) -> int:
         # have the piles in a max-heap
         piles = list(map(lambda x: -x, piles))
-        heapify(piles)
+        heap.heapify(piles)
         
         # for the amount of k, execute the operation
         while k:
-            number = heappop(piles)
+            number = heap.heappop(piles)
             number += -1 * number // 2
-            heappush(piles, number)
+            heap.heappush(piles, number)
             
             k -= 1
         
