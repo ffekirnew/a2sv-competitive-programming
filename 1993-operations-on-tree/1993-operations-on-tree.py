@@ -28,29 +28,26 @@ class LockingTree:
         return True
     
     def ancestor_locked(self, num) -> None:
-        at_least_one_locked = False
-        parent = self.parent[num]
-        
-        while parent != -1:
-            at_least_one_locked |= parent in self.locked
+        while self.parent[num] != -1:
+            if self.parent[num] in self.locked:
+                return True
             
-            parent = self.parent[parent]
+            num = self.parent[num]
         
-        return at_least_one_locked            
+        return False       
     
     def descendant_locked(self, num) -> bool:
-        at_least_one_locked = False
-        
         queue = deque(self.children[num])
         while queue:
             node = queue.popleft()
             
-            at_least_one_locked |= node in self.locked
+            if node in self.locked:
+                return True
             
             for child in self.children[node]:
                 queue.append(child)
         
-        return at_least_one_locked
+        return False
     
     def unlock_descendants(self, num) -> None:
         queue = deque(self.children[num])
@@ -64,12 +61,15 @@ class LockingTree:
                 queue.append(child)
 
     def upgrade(self, num: int, user: int) -> bool:
+        # Condition 1: The node is unlocked,
         if num in self.locked:
             return False
         
+        # Condition 2: It has at least one locked descendant (by any user)
         if not self.descendant_locked(num):
             return False
         
+        # Condition 3: It does not have any locked ancestors.
         if self.ancestor_locked(num):
             return False
         
