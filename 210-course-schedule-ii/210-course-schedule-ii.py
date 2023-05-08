@@ -1,25 +1,31 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        graph = { i: [] for i in range(numCourses) }
+        graph = { i: set() for i in range(numCourses) }
+        color = { i: 'w' for i in range(numCourses) }
         in_degree = { i: 0 for i in range(numCourses) }
         
         for course, pre_requisite in prerequisites:
+            graph[pre_requisite].add(course)
             in_degree[course] += 1
-            graph[pre_requisite].append(course)
-        
-        queue = deque([course for course in graph.keys() if in_degree[course] == 0])
-        order = []
-        
-        while queue:
-            curr_course = queue.popleft()
             
-            order.append(curr_course)
-            
-            for new_course in graph[curr_course]:
-                in_degree[new_course] -= 1
-                
-                if in_degree[new_course] == 0:
-                    queue.append(new_course)
+        def dfs(course):            
+            color[course] = 'g'
 
-        return order if len(order) == numCourses else []
+            for new_course in graph[course]:
+                if color[new_course] == 'g':
+                    return
+
+                if color[new_course] == 'w':
+                    dfs(new_course)
+                
+            color[course] = 'b'
+            order.append(course)
+
+        order = []
+        stack = [course for course in graph if in_degree[course] == 0]
+        
+        for course in stack:
+            dfs(course)
+
+        return reversed(order) if len(order) == numCourses else []
             
