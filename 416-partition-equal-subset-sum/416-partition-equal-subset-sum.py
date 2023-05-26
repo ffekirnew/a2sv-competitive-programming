@@ -4,9 +4,9 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         if sum(nums) % 2:
             return False
-        
+
         half_sum = [sum(nums) // 2]
-        nums.sort(reverse=True)
+        # nums.sort(reverse=True)
         memo = {}
         
         def backtrack(index, curr_sum):
