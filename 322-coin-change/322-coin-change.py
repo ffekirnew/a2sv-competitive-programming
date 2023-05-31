@@ -10,7 +10,7 @@ class Solution:
 
             for coin in coins:
                 if coin <= i:
-                    memo[i] = min(memo[coin] + memo[i - coin], memo[i])
+                    memo[i] = min(1 + memo[i - coin], memo[i])
 
         return -1 if memo[-1] == inf else memo[-1]
             
