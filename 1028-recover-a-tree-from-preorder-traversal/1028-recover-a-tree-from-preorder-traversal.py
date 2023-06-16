@@ -14,7 +14,6 @@ class Solution:
         
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
         levels = defaultdict(list)
-        
         curr_level, curr_number = 0, 0
         
         for i in range(len(traversal) + 1):
@@ -25,10 +24,10 @@ class Solution:
 
             else:
                 if curr_number:
-                    levels[curr_level] = TreeNode(curr_number)
+                    curr_node = levels[curr_level] = TreeNode(curr_number)
                     
                     if curr_level:
-                        parent_node, curr_node = levels[curr_level - 1], levels[curr_level]
+                        parent_node = levels[curr_level - 1]
                         self.addChild(parent_node, curr_node)
 
                     curr_number, curr_level = 0, 0
