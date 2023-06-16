@@ -5,6 +5,13 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    @staticmethod
+    def addChild(parent_node, child_node):
+        if not parent_node.left:
+            parent_node.left = child_node
+        else:
+            parent_node.right = child_node
+        
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
         levels = defaultdict(list)
         
@@ -18,20 +25,16 @@ class Solution:
 
             else:
                 if curr_number:
-                    levels[curr_level].append(TreeNode(curr_number))
+                    levels[curr_level] = TreeNode(curr_number)
+                    
                     if curr_level:
-                        parent_node = levels[curr_level - 1][-1]
-                        curr_node = levels[curr_level][-1]
-
-                        if not parent_node.left:
-                            parent_node.left = curr_node
-                        else:
-                            parent_node.right = curr_node
+                        parent_node, curr_node = levels[curr_level - 1], levels[curr_level]
+                        self.addChild(parent_node, curr_node)
 
                     curr_number, curr_level = 0, 0
                 
                 curr_level += 1
 
-        return levels[0][-1]
+        return levels[0]
             
         
