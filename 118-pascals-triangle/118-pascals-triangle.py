@@ -1,12 +1,6 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        rows = [[1], [1, 1]]
-        def get_value(row, col):
-            if not 0 <= row < len(rows) or not 0 <= col < len(rows[row]):
-                return 0
-            
-            return rows[row][col]
-        
+        rows = [[1], [1, 1]]        
         for row in range(3, numRows + 1):
             new_level = [1,]
             
