@@ -16,12 +16,12 @@ class Solution:
             if node == target and t > time and not children:
                 return probability
 
-            max_probability = 0
+            target_probability = 0
             for child in children:
                 graph[child].remove(node)
-                max_probability = max(dfs(child, probability / len(graph[node]), time + 1), max_probability)
+                target_probability = max(dfs(child, probability / len(children), time + 1), target_probability)
             
-            return max_probability
+            return target_probability
         
         return dfs(1, 1, 0)
         
