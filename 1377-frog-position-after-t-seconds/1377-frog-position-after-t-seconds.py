@@ -8,19 +8,20 @@ class Solution:
             graph[node1].add(node2)
             graph[node2].add(node1)
 
-        def dfs(node, probability, time, t):
+        def dfs(node, probability, time):
             if node == target and time == t:
                 return probability
             
-            if node == target and t > time and len(graph[node]) == 0:
+            children = graph[node]
+            if node == target and t > time and not children:
                 return probability
 
             max_probability = 0
-            for child in graph[node]:
+            for child in children:
                 graph[child].remove(node)
-                max_probability = max(dfs(child, probability / len(graph[node]), time + 1, t), max_probability)
+                max_probability = max(dfs(child, probability / len(graph[node]), time + 1), max_probability)
             
             return max_probability
         
-        return dfs(1, 1, 0, t)
+        return dfs(1, 1, 0)
         
