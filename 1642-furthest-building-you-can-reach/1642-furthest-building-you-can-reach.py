@@ -7,7 +7,7 @@ class Solution:
         heights_jumped = 0
 
         for i in range(1, len(heights)):
-            height_diff = heights[i - 1] - heights[i]
+            height_diff = heights[i - 1] - heights[i] # negative value means a jump
 
             if height_diff < 0:
                 heapq.heappush(height_diffs, height_diff)
@@ -16,9 +16,9 @@ class Solution:
             if heights_jumped > bricks:
                 if not ladders:
                     return i - 1
+
                 ladders -= 1
-                popped = heapq.heappop(height_diffs)
-                heights_jumped += popped
+                heights_jumped += heapq.heappop(height_diffs)
 
         return len(heights) - 1
         
