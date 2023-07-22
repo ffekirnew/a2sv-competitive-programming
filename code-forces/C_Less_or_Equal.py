@@ -1,21 +1,28 @@
 if __name__ == "__main__":
     n, k = map(int, input().split())
-    nums = list(map(int, input().split()))
-
-    nums.sort()
+    nums = sorted(list(map(int, input().split())))
 
     if not k:
-        print(nums[0] - 1)
+        ans = nums[0] - 1
     else:
-        answer = nums[k] - 1
-        less_count = 0
+        ans = nums[k - 1]
+    
+    print(nums)
+    print(ans)
 
-        for i in range(k):
-            if nums[i] <= answer:
-                less_count += 1
-            
-        if answer < 1 or less_count != k:
-            print("-1")
-            exit()
-        
-        print(answer)
+    count = 0
+    for i in range(n):
+        if nums[i] <= ans:
+            count += 1
+    
+    if count != k or not (1 <= ans <= 1_000_000_000):
+        print(-1)
+    else:
+        print(ans)
+    
+    exit()
+
+
+
+    
+
