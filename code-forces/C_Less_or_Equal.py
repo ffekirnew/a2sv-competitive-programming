@@ -1,28 +1,35 @@
-if __name__ == "__main__":
-    n, k = map(int, input().split())
-    nums = sorted(list(map(int, input().split())))
+class DisjointSet:
+    def __init__(self):
+        self.parent = {}
+        self.rank = {}
 
-    if not k:
-        ans = nums[0] - 1
-    else:
-        ans = nums[k - 1]
-    
-    print(nums)
-    print(ans)
+    def make_set(self, x):
+        self.parent[x] = x
+        self.rank[x] = 0
 
-    count = 0
-    for i in range(n):
-        if nums[i] <= ans:
-            count += 1
-    
-    if count != k or not (1 <= ans <= 1_000_000_000):
-        print(-1)
-    else:
-        print(ans)
-    
-    exit()
+    def find(self, x):
+        stack = []
+        while self.parent[x] != x:
+            stack.append(x)
+            x = self.parent[x]
 
+        # Path compression
+        for node in stack:
+            self.parent[node] = x
 
+        return x
 
-    
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
 
+        if root_x == root_y:
+            return
+
+        if self.rank[root_x] < self.rank[root_y]:
+            self.parent[root_x] = root_y
+        elif self.rank[root_x] > self.rank[root_y]:
+            self.parent[root_y] = root_x
+        else:
+            self.parent[root_y] = root_x
+            self.rank[root_x] += 1
