@@ -6,21 +6,18 @@
 #         self.right = right
 class Solution:
     def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
-        if n % 2 == 0:
-            return []
-
-        possible_FBTs = []
         memo = {1: [TreeNode()]}
-        
         def dp(n):
+            if n % 2 == 0:
+                return []
+
             if n not in memo:
                 memo[n] = []
                 
                 for left_nodes in range(1, n, 1):
                     for possible_left in dp(left_nodes):
                         for possible_right in dp(n - left_nodes - 1):
-                            node = TreeNode(0, possible_left, possible_right)
-                            memo[n].append(node)                            
+                            memo[n].append(TreeNode(0, possible_left, possible_right))                           
             
             return memo[n]
         
