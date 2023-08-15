@@ -1,8 +1,5 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-        if s == "abc" and p == "a***abc":
-            return True
-
         def is_alpha_or_dot(char):
             return char == '.' or 'a' <= char <= 'z'
 
@@ -34,7 +31,7 @@ class Solution:
             if is_alpha_or_dot(p[i2]) and (i2 + 1 >= len(p) or p[i2 + 1] != '*'):
                 return (p[i2] == '.' or s[i1] == p[i2]) and match(i1 + 1, i2 + 1)
             
-            return False
+            return True
         
 
         return match(0, 0)
