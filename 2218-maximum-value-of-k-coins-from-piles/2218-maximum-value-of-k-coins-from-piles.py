@@ -5,7 +5,10 @@ class Solution:
             if index == len(piles) or choices_left == 0:
                 return 0
             
-            optimal_choice = dp(index + 1, choices_left) # not picking from this pile and delegating the responsibility
+            # not picking from this pile and delegating the responsibility
+            optimal_choice = dp(index + 1, choices_left)
+
+            # Incrementally optimize by mixing choices between different piles
             chosen_from_this_pile = 0
             for i in range(min(choices_left, len(piles[index]))):
                 chosen_from_this_pile += piles[index][i]
@@ -13,6 +16,7 @@ class Solution:
                 
                 optimal_choice = max(new_choice, optimal_choice)
             
+
             return optimal_choice
         
         return dp(0, k)
