@@ -1,17 +1,19 @@
 class Solution:
     def maxValueOfCoins(self, piles: List[List[int]], k: int) -> int:
         @cache
-        def dp(index: int, choices_left: int):
+        def dp(index: int, choices_left: int) -> int:
             if index == len(piles) or choices_left == 0:
                 return 0
             
-            max_piles = dp(index + 1, choices_left)
-            chosen = 0
+            optimal_choice = dp(index + 1, choices_left) # not picking from this pile and delegating the responsibility
+            chosen_from_this_pile = 0
             for i in range(min(choices_left, len(piles[index]))):
-                chosen += piles[index][i]
-                max_piles = max(chosen + dp(index + 1, choices_left - i - 1), max_piles)
+                chosen_from_this_pile += piles[index][i]
+                new_choice = chosen_from_this_pile + dp(index + 1, choices_left - i - 1)
+                
+                optimal_choice = max(new_choice, optimal_choice)
             
-            return max_piles
+            return optimal_choice
         
         return dp(0, k)
                 
