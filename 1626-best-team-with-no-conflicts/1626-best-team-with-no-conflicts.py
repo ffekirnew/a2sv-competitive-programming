@@ -1,6 +1,9 @@
 class Solution:
     def bestTeamScore(self, scores: List[int], ages: List[int]) -> int:
         scores_and_ages = [(ages[i], scores[i]) for i in range(len(scores))]
+        del scores
+        del ages
+        
         scores_and_ages.sort()
         
         @cache
