@@ -1,13 +1,10 @@
 class Solution:
     def bestTeamScore(self, scores: List[int], ages: List[int]) -> int:
         scores_and_ages = [(ages[i], scores[i]) for i in range(len(scores))]
-        del scores
-        del ages
-        
         scores_and_ages.sort()
         
         @cache
-        def dp(index: int, highest_so_far: int) -> int:
+        def dp(index: int, highest_so_far: Tuple[int, int]) -> int:
             if index == len(scores_and_ages):
                 return 0
             
@@ -22,8 +19,6 @@ class Solution:
                 
                 if score >= highest_score:
                     highest_possible = max(highest_possible, score + dp(index + 1, (age, score)))
-                else:
-                    highest_possible = max(highest_possible, score + dp(index + 1, (highest_score_age, highest_score)))
                 
                 return highest_possible
            
