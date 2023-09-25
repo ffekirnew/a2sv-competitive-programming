@@ -26,20 +26,20 @@ class Solution:
         
         @cache
         def dp(node: int, parent: int) -> int:
-            node_best_solution = {
-                "halved": (price[node] // 2) * node_freq_in_trips[node],
-                "full": price[node] * node_freq_in_trips[node],
-            }
+            node_best_solution = [
+                (price[node] // 2) * node_freq_in_trips[node],
+                price[node] * node_freq_in_trips[node],
+            ]
             
             for child in tree[node]:
                 if child == parent: continue
 
                 halved, full = dp(child, node)
                 
-                node_best_solution["full"] += min(halved, full)
-                node_best_solution["halved"] += full
+                node_best_solution[1] += min(halved, full)
+                node_best_solution[0] += full
             
-            return node_best_solution["halved"], node_best_solution["full"]
+            return node_best_solution
 
         return min(dp(0, -1))
             
