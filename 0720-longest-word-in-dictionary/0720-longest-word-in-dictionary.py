@@ -45,14 +45,13 @@ class Trie:
 
 class Solution:
     def longestWord(self, words: List[str]) -> str:
+        words.sort()
         result = ""
 
         trie = Trie()
 
         for word in words:
             trie.insert(word)
-        
-        for word in words:
             if trie.search(word):
                 if len(word) > len(result) or len(word) == len(result) and word < result:
                     result = word
