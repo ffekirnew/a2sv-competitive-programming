@@ -26,6 +26,7 @@ class WordDictionary:
         for i, char in enumerate(word):
             if char == '.':
                 return any(self.search(word[i+1:], child) for child in curr.children.values())
+
             if char not in curr.children:
                 return False
 
