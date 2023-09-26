@@ -38,7 +38,6 @@ class MapSum:
     def __init__(self):
         self.trie = Trie()
         self.words = {}
-        
 
     def insert(self, key: str, val: int) -> None:
         if key in self.words:
