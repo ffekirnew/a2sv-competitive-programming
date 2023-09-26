@@ -1,6 +1,6 @@
 class TrieNode:
     def __init__(self, is_end_of_word: int = 0, word_index: int = -1):
-        self.children = [None for _ in range(26)]
+        self.children = {}
         self.is_end_of_word = is_end_of_word
         self.word_index = word_index
 
@@ -9,26 +9,20 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
 
-    def insert(self, word: str) -> bool:
+    def insert_with_validation(self, word: str) -> bool:
         curr = self.root
 
         for i, char in enumerate(word):
-            char_index = Trie.index_of_char(char)
+            if char not in curr.children:
+                if i != len(word) - 1: return False
+                curr.children[char] = TrieNode(i == len(word) - 1)
 
-            if not curr.children[char_index]:
-                if i != len(word) - 1:
-                    return False
-                curr.children[char_index] = TrieNode(i == len(word) - 1)
             else:
-                curr.children[char_index].is_end_of_word |= i == len(word) - 1
+                curr.children[char].is_end_of_word |= i == len(word) - 1
 
-            curr = curr.children[char_index]
+            curr = curr.children[char]
         
         return True
-    
-    @staticmethod
-    def index_of_char(char: str) -> int:
-        return ord(char) - (ord("a") if "a" <= char <= "z" else ord("A"))
 
 
 class Solution:
@@ -37,9 +31,8 @@ class Solution:
         result = ""
 
         trie = Trie()
-
         for word in words:
-            if trie.insert(word):
+            if trie.insert_with_validation(word):
                 if len(word) > len(result) or len(word) == len(result) and word < result:
                     result = word
         
