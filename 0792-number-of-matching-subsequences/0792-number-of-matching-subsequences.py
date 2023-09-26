@@ -20,7 +20,6 @@ class Solution:
 
             for i, char in enumerate(word):
                 char_index = ord(char) - 97
-                
                 if trie[trie_index][char_index] == None:
                     is_subsequence = False
                     break
