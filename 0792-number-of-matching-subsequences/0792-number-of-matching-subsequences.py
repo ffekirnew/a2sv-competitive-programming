@@ -11,7 +11,7 @@ class Solution:
 
                 trie[index + 1] = new_trie_node
 
-        counter = 0
+        subsequence_counter = 0
         for word in words:
             trie_index = 0
             is_subsequence = True
@@ -24,9 +24,9 @@ class Solution:
                 trie_index = trie[trie_index][char] + 1
             
             if is_subsequence:
-                counter += 1
+                subsequence_counter += 1
         
-        return counter
+        return subsequence_counter
                 
                 
                     
