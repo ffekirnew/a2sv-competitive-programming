@@ -1,27 +1,26 @@
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        next_alphabet = [None for __ in range(len(s) + 1)]
+        trie = [None for __ in range(len(s) + 1)]
         for i in range(len(s) - 1, -2, -1):
             if i == len(s) - 1:
-                next_alphabet[i + 1] = [ None for _ in range(26) ]
+                trie[i + 1] = {}
             else:
-                before_this_char = next_alphabet[i + 2].copy()
-                before_this_char[ord(s[i + 1]) - 97] = i + 1
+                new_trie_node = trie[i + 2].copy()
+                new_trie_node[s[i + 1]] = i + 1
 
-                next_alphabet[i + 1] = before_this_char
+                trie[i + 1] = new_trie_node
 
         counter = 0
         for word in words:
-            next_alphabet_index = 0
+            trie_index = 0
             is_subsequence = True
+
             for i, char in enumerate(word):
-                char_index = ord(char) - 97
-                
-                if next_alphabet[next_alphabet_index][char_index] == None:
+                if char not in trie[trie_index]:
                     is_subsequence = False
                     break
                 
-                next_alphabet_index = next_alphabet[next_alphabet_index][char_index] + 1
+                trie_index = trie[trie_index][char] + 1
             
             if is_subsequence:
                 counter += 1
