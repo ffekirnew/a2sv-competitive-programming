@@ -2,8 +2,6 @@ class TrieNode:
     def __init__(self, is_end_of_word: int = 0, word_index: int = -1):
         self.children = {}
         self.is_end_of_word = is_end_of_word
-        self.word_index = word_index
-
         
 class Trie:
     def __init__(self):
