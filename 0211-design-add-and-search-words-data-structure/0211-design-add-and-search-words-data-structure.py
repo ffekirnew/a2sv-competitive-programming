@@ -20,12 +20,13 @@ class WordDictionary:
 
             curr = curr.children[char]
         
-    def search(self, word: str, node: TrieNode = None) -> bool:
+    def search(self, word: str, node: TrieNode = None, index: int = 0) -> bool:
         curr = node if node != None else self.root
 
-        for i, char in enumerate(word):
+        for i in range(index, len(word)):
+            char = word[i]
             if char == '.':
-                return any(self.search(word[i+1:], child) for child in curr.children.values())
+                return any(self.search(word, child, i + 1) for child in curr.children.values())
 
             if char not in curr.children:
                 return False
