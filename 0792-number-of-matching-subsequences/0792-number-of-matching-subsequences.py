@@ -1,32 +1,36 @@
 class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
-        trie = [None for _ in range(len(s) + 1)]
-
-        for index in range(len(s) - 1, -2, -1):
-            if index == len(s) - 1:
-                trie[index + 1] = {}
+        # Build a trie for the string
+        trie = [None for __ in range(len(s) + 1)]
+        for i in range(len(s) - 1, -2, -1):
+            if i == len(s) - 1:
+                trie[i + 1] = [ None for _ in range(26) ]
             else:
-                new_trie_node = trie[index + 2].copy()
-                new_trie_node[s[index + 1]] = index + 1
+                new_trie_node = trie[i + 2].copy()
+                new_trie_node[ord(s[i + 1]) - 97] = i + 1
 
-                trie[index + 1] = new_trie_node
+                trie[i + 1] = new_trie_node
 
-        subsequence_counter = 0
+        # Go through the words and count the subsequences
+        subsequences = 0
+
         for word in words:
             trie_index = 0
             is_subsequence = True
 
             for i, char in enumerate(word):
-                if char not in trie[trie_index]:
+                char_index = ord(char) - 97
+                
+                if trie[trie_index][char_index] == None:
                     is_subsequence = False
                     break
                 
-                trie_index = trie[trie_index][char] + 1
+                trie_index = trie[trie_index][char_index] + 1
             
             if is_subsequence:
-                subsequence_counter += 1
+                subsequences += 1
         
-        return subsequence_counter
+        return subsequences
                 
                 
                     
