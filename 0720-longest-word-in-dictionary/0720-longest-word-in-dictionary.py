@@ -9,34 +9,22 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
 
-    def insert(self, word: str) -> None:
+    def insert(self, word: str) -> bool:
         curr = self.root
 
         for i, char in enumerate(word):
             char_index = Trie.index_of_char(char)
 
             if not curr.children[char_index]:
+                if i != len(word) - 1:
+                    return False
                 curr.children[char_index] = TrieNode(i == len(word) - 1)
             else:
                 curr.children[char_index].is_end_of_word |= i == len(word) - 1
 
             curr = curr.children[char_index]
-
-    def search(self, word: str) -> bool:
-        curr = self.root
-
-        for i, char in enumerate(word):
-            char_index = Trie.index_of_char(char)
-
-            if i and not curr.is_end_of_word:
-                return False
-
-            if curr.children[char_index] is None:
-                return False
-
-            curr = curr.children[char_index]    
-
-        return curr.is_end_of_word
+        
+        return True
     
     @staticmethod
     def index_of_char(char: str) -> int:
@@ -51,11 +39,8 @@ class Solution:
         trie = Trie()
 
         for word in words:
-            trie.insert(word)
-            if trie.search(word):
+            if trie.insert(word):
                 if len(word) > len(result) or len(word) == len(result) and word < result:
                     result = word
         
         return result
-            
-            
