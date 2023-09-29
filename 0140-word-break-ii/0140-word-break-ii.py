@@ -53,7 +53,7 @@ class Trie:
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        dictionary = Trie.build_trie(wordDict)
+        dictionary = set(wordDict)
         
         @cache
         def dp(curr_index: int) -> List[List[str]]:
@@ -65,7 +65,7 @@ class Solution:
             for index in range(curr_index, len(s)):
                 curr_word = s[curr_index : index + 1]
                 
-                if dictionary.search(curr_word):
+                if curr_word in dictionary:
                     following_sentences = dp(index + 1)
 
                     if following_sentences:
