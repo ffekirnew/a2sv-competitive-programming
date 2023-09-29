@@ -56,22 +56,23 @@ class Solution:
         dictionary = Trie.build_trie(wordDict)
         
         @cache
-        def dp(word_start: int, curr_index: int) -> List[List[str]]:
+        def dp(curr_index: int) -> List[List[str]]:
             if curr_index == len(s):
                 return []
             
-            possible_sentences = []
-            curr_word = s[word_start:curr_index+1]
-            if dictionary.search(curr_word):
-                following_sentences = dp(curr_index + 1, curr_index + 1)
+            possible_sentences: List[List[str]] = []
+
+            for index in range(curr_index, len(s)):
+                curr_word = s[curr_index : index + 1]
                 
-                if following_sentences:
-                    possible_sentences = [ [curr_word] + sentence for sentence in following_sentences ]
-                elif curr_index + 1 == len(s):
-                    possible_sentences = [ [curr_word] ]
-            
-            possible_sentences += dp(word_start, curr_index + 1)
+                if dictionary.search(curr_word):
+                    following_sentences = dp(index + 1)
+
+                    if following_sentences:
+                        possible_sentences += [ [curr_word] + sentence for sentence in following_sentences ]
+                    elif index + 1 == len(s):
+                        possible_sentences += [ [curr_word] ]
             
             return possible_sentences
         
-        return [" ".join(sentence) for sentence in dp(0, 0)]
+        return [" ".join(sentence) for sentence in dp(0)]
