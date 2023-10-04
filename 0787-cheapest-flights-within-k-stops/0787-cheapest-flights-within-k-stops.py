@@ -8,23 +8,23 @@ class Solution:
         for from_, to_, price in flights:
             graph[from_].append((to_, price))
 
-        heap = [(0, k, src)] # price, stops_left, node
+        heap = [(0, k, src)] # price, k_left, node
         visited = set([])
         
         while heap:
-            curr_price, stops_left, node = heappop(heap)
+            curr_price, k_left, node = heappop(heap)
             
             if node == dst:
                 return curr_price
             
-            if (node, stops_left) in visited:
+            if (node, k_left) in visited:
                 continue
             
-            visited.add((node, stops_left))
+            visited.add((node, k_left))
             
             for neighbour, flight_price in graph[node]:
                 total_price = curr_price + flight_price
-                if (stops_left > 0 or neighbour == dst):
-                    heappush(heap, (total_price, stops_left - 1, neighbour))
+                if (k_left >= 0):
+                    heappush(heap, (total_price, k_left - 1, neighbour))
         
         return -1
