@@ -15,13 +15,12 @@ class CountSubarraysWithScoreLessThanK:
         running_sum = 0
         left = 0
         for right, number in enumerate(nums):
-            while (number + running_sum)* (right - left + 1) >= k:
+            while (number + running_sum) * (right - left + 1) >= k:
                 running_sum -= nums[left]
                 left += 1
 
-            if (number + running_sum) * (right - left + 1) < k:
-                count += (right - left + 1)
-                running_sum += number
+            count += (right - left + 1)
+            running_sum += number
         
         return count
 
