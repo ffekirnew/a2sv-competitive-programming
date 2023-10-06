@@ -1,3 +1,15 @@
+"""
+Solution Steps:
+1. Build a graph of variables as nodes and values as edges
+2. Do bfs from variable1 to variable2 and multiply each edge value on the path
+
+Complexity Analysis:
+- Time: O(Q * E)
+- Space: O(E)
+"""
+
+
+
 from collections import defaultdict
 
 
