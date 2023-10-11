@@ -1,3 +1,17 @@
+"""
+Solution Steps:
+1. Check if the string is an ipv4, ipv6 or neither candidate just by using the charachters '.' and ':'
+2. Run the respective checks
+    2.1. If IPv4, check using the rules
+    2.2. If IPv6, check using the rules
+3. Return the results
+
+Complexity Analysis:
+- Time Complexity: O(n)
+- Space complexity: O(n)
+    where: n = length of string
+"""
+
 
 class ValidateIpAddress:
     def __init__(self, query_ip: str):
@@ -12,7 +26,7 @@ class ValidateIpAddress:
         for segment in segments:
             try:
                 number = int(segment)
-                if len(segment) != len(str(number)) or not (0 <= number < 256):
+                if not(len(segment) == len(str(number)) and 0 <= number < 256):
                     return "Neither"
             except:
                 return "Neither"
