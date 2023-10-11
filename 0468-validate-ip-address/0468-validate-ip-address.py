@@ -48,7 +48,6 @@ class ValidateIpAddress:
                     return "Neither"
 
         return "IPv6"
-
     
     def run(self):
         ipv4_candidate = '.' in self.query_ip
