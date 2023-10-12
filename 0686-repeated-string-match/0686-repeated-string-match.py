@@ -1,3 +1,17 @@
+"""
+Solution Steps:
+This is a normal substring search but the string to be searched might be shorter.
+1. Search the string by making it larger or going on it in circles
+    1.1. If found, return the number of times the string to be searched was repeated
+2. Return -1
+
+
+Complexity Analysis:
+1. Time Complexity: O()
+
+"""
+
+
 class RepeatedStringMatch:
     def __init__(self, haystack: str, needle: str):
         self.haystack = haystack
@@ -29,6 +43,7 @@ class RepeatedStringMatch:
 
     def rabin_carp(self):
         haystack_length = len(self.haystack)
+        needle_length = len(self.needle)
 
         repeated = 1
         needle_hash = self._hash(self.needle)
@@ -37,7 +52,7 @@ class RepeatedStringMatch:
 
         left = 0
         right = 0
-        while repeated * haystack_length < 10 * needle_length:
+        while repeated * haystack_length < 10 * needle_length or repeated < 10:
             window_hash = self._add_last(window_hash, self.haystack[right])
             window_length += 1
 
@@ -75,5 +90,5 @@ class RepeatedStringMatch:
 class Solution:
     def repeatedStringMatch(self, a: str, b: str) -> int:
         solution = RepeatedStringMatch(a, b)
-        return solution.brute_force()
+        return solution.rabin_carp()
         
