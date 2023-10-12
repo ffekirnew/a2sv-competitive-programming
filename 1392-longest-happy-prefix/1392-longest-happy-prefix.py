@@ -2,10 +2,11 @@ class LongestHappyPrefix:
     def __init__(self, string: str):
         self.string = string
 
-        self.lps = [0] * len(self.string)
 
     def kmp(self):
+        self.lps = [0] * len(self.string)
         prev_lps, index = 0, 1
+
         while index < len(self.string):
             if self.string[prev_lps] == self.string[index]:
                 self.lps[index] = prev_lps + 1
@@ -20,7 +21,7 @@ class LongestHappyPrefix:
         
         # print(self.lps)
         length = len(self.string)
-        return self.string[length - self.lps[-1]: length + 1]
+        return self.string[length - self.lps[-1]:]
 
 
 
