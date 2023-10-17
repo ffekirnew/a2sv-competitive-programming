@@ -46,6 +46,7 @@ def longest_palindrome(s):
             left -= 1
             right += 1
             radius[center] += 1
+
         # The last move broke the palindrome property, undo it
         left += 1
         right -= 1
