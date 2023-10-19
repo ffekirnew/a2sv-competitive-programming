@@ -6,31 +6,25 @@ class EditDistance:
         self.word1 = word1
         self.word2 = word2
 
-    def top_down(self) -> int:
-        @cache
-        def dp(index1: int, index2: int) -> int:
-            if index2 >= len(self.word2):
-                return len(self.word1) - index1
-            
-            if index1 >= len(self.word1):
-                return len(self.word2) - index2
-            
-            if self.word1[index1] == self.word2[index2]:
-                # if they are similar
-                return dp(index1 + 1, index2 + 1)
-            
-            # if replaced
-            replaced = 1 + dp(index1 + 1, index2 + 1)
-            
-            # if deleted
-            deleted = 1 + dp(index1 + 1, index2)
-            
-            # if inserted
-            inserted = 1 + dp(index1, index2 + 1)
-            
-            return min(replaced, deleted, inserted)
-        
-        return dp(0, 0)
+    @cache
+    def top_down(self, index1: int = 0, index2: int = 0) -> int:
+        word1_length = len(self.word1)
+        word2_length = len(self.word2)
+
+        if index2 == word2_length:
+            return word1_length - index1
+
+        if index1 == word1_length:
+            return word2_length - index2
+
+        if self.word1[index1] == self.word2[index2]:
+            return self.top_down(index1 + 1, index2 + 1)
+
+        replaced = self.top_down(index1 + 1, index2 + 1)
+        deleted = self.top_down(index1 + 1, index2)
+        inserted = self.top_down(index1, index2 + 1)
+
+        return 1 + min(replaced, deleted, inserted)
 
 
 class Solution:
