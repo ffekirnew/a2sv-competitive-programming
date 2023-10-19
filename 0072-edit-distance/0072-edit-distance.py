@@ -15,14 +15,12 @@ class EditDistance:
             if index1 >= len(self.word1):
                 return len(self.word2) - index2
             
-            similar, replaced, deleted, inserted = inf, inf, inf, inf
-            
             if self.word1[index1] == self.word2[index2]:
                 # if they are similar
-                similar = dp(index1 + 1, index2 + 1)
-            else:
-                # if replaced
-                replaced = 1 + dp(index1 + 1, index2 + 1)
+                return dp(index1 + 1, index2 + 1)
+            
+            # if replaced
+            replaced = 1 + dp(index1 + 1, index2 + 1)
             
             # if deleted
             deleted = 1 + dp(index1 + 1, index2)
@@ -30,7 +28,7 @@ class EditDistance:
             # if inserted
             inserted = 1 + dp(index1, index2 + 1)
             
-            return min(similar, replaced, deleted, inserted)
+            return min(replaced, deleted, inserted)
         
         return dp(0, 0)
 
