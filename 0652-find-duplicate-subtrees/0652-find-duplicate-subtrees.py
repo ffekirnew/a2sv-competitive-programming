@@ -15,17 +15,9 @@ class FindDuplicateSubtrees:
         nodes = defaultdict(int)
         def dfs(node):
             if node is None:
-                return ""
-            
-            left = dfs(node.left)
-            if not left:
-                left = '><'
+                return "><"
 
-            right = dfs(node.right)
-            if not right:
-                right = '><'
-
-            string_representation = '>' + str(node.val) + '<' + left + right
+            string_representation = '>' + str(node.val) + '<' + dfs(node.left) + dfs(node.right)
             nodes[string_representation] += 1
 
             if nodes[string_representation] > 1:
