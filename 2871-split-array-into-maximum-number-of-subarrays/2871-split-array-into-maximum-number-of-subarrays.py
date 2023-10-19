@@ -3,17 +3,17 @@ class SplitArrayIntoMaximumNumberOfSubarrays:
         self.nums = nums
         
     def solve(self):
-        counter = 0
+        zero_subarrays_counter = 0
         running_and = ~0
         
         for num in self.nums:
             running_and &= num
             
             if running_and == 0:
-                counter += 1
+                zero_subarrays_counter += 1
                 running_and = ~0
         
-        return max(counter, 1)
+        return max(zero_subarrays_counter, 1)
 
 
 class Solution:
