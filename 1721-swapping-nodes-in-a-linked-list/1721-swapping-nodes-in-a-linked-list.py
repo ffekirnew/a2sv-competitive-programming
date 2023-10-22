@@ -6,23 +6,23 @@
 class Solution:
     def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         kth_from_beggining = None
-        turtle = head
-        hare = head
+        kth_from_end = head
+        end = head
         index = 1
         
-        while hare:
+        while end is not None:
             if index == k:
-                kth_from_beggining = hare
+                kth_from_beggining = end
             if index > k:
-                turtle = turtle.next
+                kth_from_end = kth_from_end.next
 
-            hare = hare.next
+            end = end.next
             index += 1
         
         if kth_from_beggining is None:
             kth_from_beggining = head
         
-        kth_from_beggining.val, turtle.val = turtle.val, kth_from_beggining.val
+        kth_from_beggining.val, kth_from_end.val = kth_from_end.val, kth_from_beggining.val
                 
         
         return head
