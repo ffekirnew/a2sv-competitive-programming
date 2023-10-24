@@ -5,23 +5,24 @@ class Solution:
 
         nums.sort()
 
-        result = {}
+        result = set()
         for index in range(len(nums) - 2):            
             left, right = index + 1, len(nums) - 1
-            while left < right:
-                triplet = [nums[left], nums[right], nums[index]]
-                sum_ = sum(triplet)
 
-                if sum_ == 0:
-                    result[str_representation(triplet)] = triplet
+            while left < right:
+                triplet = (nums[left], nums[right], nums[index])
+                triplet_sum = sum(triplet)
+
+                if triplet_sum == 0:
+                    result.add(triplet)
                     right -= 1
                     left += 1
-                elif sum_ > 0:
+                elif triplet_sum > 0:
                     right -= 1
                 else:
                     left += 1
         
-        return result.values()
+        return result
                     
                 
         
