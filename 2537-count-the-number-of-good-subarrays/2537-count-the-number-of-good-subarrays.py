@@ -8,8 +8,7 @@ class Solution:
         
         left = 0
         for right in range(N):
-            if freq_count[nums[right]] > 0:
-                pairs_count += freq_count[nums[right]]
+            pairs_count += freq_count[nums[right]]
             freq_count[nums[right]] += 1
 
             while pairs_count >= k:
