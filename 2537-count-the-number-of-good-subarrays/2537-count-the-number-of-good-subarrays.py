@@ -7,18 +7,18 @@ class Solution:
         pairs_count = 0
         
         left = 0
-        for right in range(N):
-            pairs_count += freq_count[nums[right]]
-            freq_count[nums[right]] += 1
+        for right, number in enumerate(nums):
+            pairs_count += freq_count[number]
+            freq_count[number] += 1
 
             while pairs_count >= k:
                 good_subarrays_count += N - right
                 
-                pairs_count -= (freq_count[nums[left]] - 1)
-                freq_count[nums[left]] -= 1
+                left_number = nums[left]
+                pairs_count -= (freq_count[left_number] - 1)
+                freq_count[left_number] -= 1
 
                 left += 1
-            
     
         return good_subarrays_count
                 
