@@ -13,9 +13,10 @@ class Solution:
 
             while pairs_count >= k:
                 good_subarrays_count += N - right
-                if freq_count[nums[left]]:
-                    pairs_count -= (freq_count[nums[left]] - 1)
+                
+                pairs_count -= (freq_count[nums[left]] - 1)
                 freq_count[nums[left]] -= 1
+
                 left += 1
             
     
