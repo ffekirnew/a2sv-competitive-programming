@@ -15,9 +15,14 @@ class FindUniqueBinaryString:
         for i in range(pow(2, self.N)):
             if i not in nums_set:
                 return pad(bin(i)[2:])
+    
+    def cantors_diagonal(self):
+        answer = []
         
+        for i, num in enumerate(nums):
+            answer.append("1" if num[i] == "0" else "0")
         
-
+        return "".join(answer)
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
