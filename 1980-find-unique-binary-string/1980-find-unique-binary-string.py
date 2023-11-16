@@ -19,7 +19,7 @@ class FindUniqueBinaryString:
     def cantors_diagonal(self):
         answer = []
         
-        for i, num in enumerate(nums):
+        for i, num in enumerate(self.nums):
             answer.append("1" if num[i] == "0" else "0")
         
         return "".join(answer)
@@ -27,6 +27,6 @@ class FindUniqueBinaryString:
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
         solution = FindUniqueBinaryString(nums)
-        return solution.approach_1()
+        return solution.cantors_diagonal()
         
         
